@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NO! You should tip me!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .pos-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .amount {
+            font-size: 48px;
+            font-weight: bold;
+            color: #000;
+            margin: 20px 0;
+        }
+
+        .tip-text {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .tip-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .tip-button {
+            background: #f0f0f0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tip-button:hover {
+            background: #e8e8e8;
+            border-color: #d0d0d0;
+            transform: translateY(-2px);
+        }
+
+        .tip-button:active {
+            transform: translateY(0);
+        }
+
+        .no-tip {
+            text-align: center;
+            padding: 15px;
+            color: #999;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .no-tip:hover {
+            color: #666;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .message-box {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            animation: spinIn 1s ease-out;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .message-box h2 {
+            font-size: 48px;
+            color: #333;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes spinIn {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(720deg);
+                opacity: 1;
+            }
+        }
+
+        /* @keyframes spinIn {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(360deg);
+            }
+            100% {
+                transform: scale(1) rotate(720deg);
+                opacity: 1;
+            }
+        } */
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pos-container">
+        <div class="header">
+            <h1>I have been a very good customer</h1>
+        </div>
+        <div class="tip-text">Select tip amount</div>
+
+        <div class="tip-buttons">
+            <button class="tip-button" onclick="showMessage()">10%</button>
+            <button class="tip-button" onclick="showMessage()">20%</button>
+            <button class="tip-button" onclick="showMessage()">50%</button>
+            <button class="tip-button" onclick="showMessage()">Other</button>
+        </div>
+
+        <div class="no-tip" onclick="showMessage()">No Tip</div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="hideMessage()">
+        <div class="message-box" onclick="event.stopPropagation()">
+            <h2>That's how it feels!</h2>
+        </div>
+    </div>
+
+    <script>
+        function showMessage() {
+            document.getElementById('overlay').classList.add('active');
+        }
+
+        function hideMessage() {
+            document.getElementById('overlay').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
